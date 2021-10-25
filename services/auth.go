@@ -18,10 +18,18 @@ func NewAuthService(session *sql.DB) *authService {
 }
 
 
-func (a authService) Register(ctx context.Context, request *auth.RegisterRequest) (*auth.RegisterResponse, error) {
+func (service authService) Register(ctx context.Context, request *auth.RegisterRequest) (*auth.RegisterResponse, error) {
+	id:=service.storage.UserStorage().Create(request)
+	return &auth.RegisterResponse{
+		Id: id,
+	}, nil
+}
+
+func (service authService) Login(ctx context.Context, request *auth.LoginRequest) (*auth.LoginResponse, error) {
 	panic("implement me")
 }
 
-func (a authService) Login(ctx context.Context, request *auth.LoginRequest) (*auth.LoginResponse, error) {
-	panic("implement me")
+func (service authService) FindOne(ctx context.Context, request *auth.FindOneRequest) (*auth.FindOneResponse, error) {
+	user:=service.storage.UserStorage().GetById(request.Id)
+	return user,nil
 }

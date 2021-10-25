@@ -8,6 +8,7 @@ import "auth.proto";
 service AuthService {
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
 }
 
 message LoginRequest {
