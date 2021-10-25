@@ -3,3 +3,13 @@ syntax = "proto3";
 package genproto;
 option go_package="genproto/auth_service";
 
+message RegisterRequest {
+  string name=1;
+  string surname=2;
+  string login=3;
+  string password=4;
+}
+
+message RegisterResponse {
+  string id=1;
+}

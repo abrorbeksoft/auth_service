@@ -1,37 +1,26 @@
 package storage
 
+import (
+	"database/sql"
+	"github.com/abrorbeksoft/auth_service/storage/postgres"
+	"github.com/abrorbeksoft/auth_service/storage/repos"
+)
+
 type StorageI interface {
-	UserStorage() UserStorage
+	UserStorage() repos.UserStorageI
 }
 
-type UserStorage interface {
-	Create(id string) string
-}
-type Just struct {
-
+type postgresStorage struct {
+	postgresRepo repos.UserStorageI
 }
 
-func NewStorage() StorageI {
-	return &Just{
 
+func NewStorage(session *sql.DB) StorageI {
+	return &postgresStorage{
+		postgresRepo: postgres.NewAuth(session),
 	}
 }
 
-
-func (j *Just) UserStorage() UserStorage {
-	return NewJust1()
-}
-
-type Just1 struct {
-
-}
-
-func NewJust1() UserStorage {
-	return &Just1{
-
-	}
-}
-
-func (j *Just1) Create(id string) string {
-	return "Hello"
+func (p postgresStorage) UserStorage() repos.UserStorageI {
+	return p.postgresRepo
 }

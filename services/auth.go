@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"database/sql"
 	auth "github.com/abrorbeksoft/auth_service/genproto/auth_service"
 	"github.com/abrorbeksoft/auth_service/storage"
 )
@@ -10,21 +11,17 @@ type authService struct {
 	storage storage.StorageI
 }
 
-
-func NewAuthService() *authService {
+func NewAuthService(session *sql.DB) *authService {
 	return &authService{
-		//storage:
+		storage: storage.NewStorage(session),
 	}
 }
 
 
-func (a authService) LoginUser(ctx context.Context, request *auth.LoginRequest) (*auth.LoginResponse, error) {
-	var token auth.Token
-	token.Id="sdmfldsmf"
-	token.CreatedAt="lsdmldmf"
-	token.UpdatedAt="sdmfldfm"
+func (a authService) Register(ctx context.Context, request *auth.RegisterRequest) (*auth.RegisterResponse, error) {
+	panic("implement me")
+}
 
-	return &auth.LoginResponse{
-		Token: &token,
-	}, nil
+func (a authService) Login(ctx context.Context, request *auth.LoginRequest) (*auth.LoginResponse, error) {
+	panic("implement me")
 }

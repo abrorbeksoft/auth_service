@@ -9,6 +9,9 @@ import (
 type config struct {
 	AuthServiceHost string
 	AuthServicePort string
+	PostgresUser string
+	PostgresPassword string
+	PostgresDBName string
 }
 
 func Load() *config {
@@ -18,6 +21,9 @@ func Load() *config {
 	conf:=config{}
 	conf.AuthServiceHost = cast.ToString(getOrReturnDefaultValue("AUTH_HOST","localhost"))
 	conf.AuthServicePort = cast.ToString(getOrReturnDefaultValue("AUTH_PORT","8000"))
+	conf.PostgresUser = cast.ToString(getOrReturnDefaultValue("POSTGRES_USER","user"))
+	conf.PostgresPassword = cast.ToString(getOrReturnDefaultValue("POSTGRES_PASSWORD","password"))
+	conf.PostgresDBName = cast.ToString(getOrReturnDefaultValue("POSTGRES_DB_NAME","database"))
 	return &conf
 }
 
